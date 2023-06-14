@@ -1,3 +1,3 @@
-const DB_URL = 'mongodb://localhost:27017/bitfilmsdb';
+const DB_URL = 'mongodb://127.0.0.1:27017/bitfilmsdb';
 
 module.exports = DB_URL;
