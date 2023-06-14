@@ -46,11 +46,10 @@ const movieSchema = new mongoose.Schema({
     },
   },
   owner: {
-    ref: 'user',
     required: true,
     type: mongoose.Schema.Types.ObjectId,
   },
-  movieId: {
+  movieId: { // id фильма, который содержится в ответе сервиса MoviesExplorer
     required: true,
     type: Number,
   },
@@ -63,5 +62,9 @@ const movieSchema = new mongoose.Schema({
     type: String,
   },
 }, { versionKey: false });
+
+// Правило, по которому каждый пользователь не может сохранять одно и то же видео несколько раз,
+// если оно уже сохранено
+movieSchema.index({ owner: 1, movieId: 1 }, { unique: true });
 
 module.exports = mongoose.model('movie', movieSchema);
