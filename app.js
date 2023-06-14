@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const cors = require('./middlewares/cors');
 const customError = require('./middlewares/customError');
 const defaultError = require('./middlewares/defaultError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
@@ -34,6 +35,8 @@ mongoose.connect(DB_URL, {
 });
 
 app.use(requestLogger); // подключаем логгер запросов
+
+app.use(cors);
 
 app.use(cookieParser()); // подключаем парсер кук
 
