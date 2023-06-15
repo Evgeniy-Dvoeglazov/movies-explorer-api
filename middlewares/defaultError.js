@@ -1,6 +1,4 @@
-const http2 = require('node:http2');
-
-const { HTTP_STATUS_INTERNAL_SERVER_ERROR } = http2.constants; // 500
+const { HTTP_STATUS_INTERNAL_SERVER_ERROR } = require('../utils/constants'); // 500
 
 module.exports = (err, req, res, next) => {
   const { statusCode = HTTP_STATUS_INTERNAL_SERVER_ERROR, message } = err;

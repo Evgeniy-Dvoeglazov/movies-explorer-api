@@ -1,6 +1,4 @@
-const http2 = require('node:http2');
-
-const { HTTP_STATUS_BAD_REQUEST } = http2.constants; // 400
+const { HTTP_STATUS_BAD_REQUEST } = require('../utils/constants'); // 400
 
 class BadRequestError extends Error {
   constructor(message) {

@@ -21,7 +21,13 @@ module.exports.getCurrentUser = (req, res, next) => {
 module.exports.changeProfileInfo = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, req.body, { new: true, runValidators: true })
     .then((user) => res.send(user))
-    .catch(next);
+    .catch((err) => {
+      if (err.code === 11000) {
+        next(new ConflictError('Пользователь с таким email уже существует'));
+      } else {
+        next(err);
+      }
+    });
 };
 
 // Создает пользователя

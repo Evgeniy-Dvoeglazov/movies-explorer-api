@@ -14,8 +14,8 @@ router.use('/movies', require('./movies'));
 
 router.post('/signout', logout);
 
-router.use(() => { // Выводим ошибку при неверных роутах
-  throw new NotFoundError('Запрашиваемая информация не найдена');
+router.use((req, res, next) => { // Выводим ошибку при неверных роутах
+  next(new NotFoundError('Запрашиваемая информация не найдена'));
 });
 
 module.exports = router;
