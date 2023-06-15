@@ -4,21 +4,12 @@ const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
 const helmet = require('helmet');
-const rateLimit = require('express-rate-limit');
+const limiter = require('./middlewares/rateLimiter');
 const cors = require('./middlewares/cors');
 const customError = require('./middlewares/customError');
 const defaultError = require('./middlewares/defaultError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const DB_URL = require('./utils/utils');
-
-// Применяем промежуточное ПО ограничения скорости ко всем запросам.
-// Для защиты от DoS-атак.
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 минут
-  max: 100, // Ограничение каждого IP до 100 запросов `window` (here, per 15 minutes)
-  standardHeaders: true, // Возвращаем информацию об ограничении скорости в заголовках `RateLimit-*`
-  legacyHeaders: false, // Отключаем заголовки `X-RateLimit-*`
-});
 
 const { PORT = 3000 } = process.env;
 const app = express();
