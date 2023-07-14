@@ -5,6 +5,8 @@ const allowedCors = [
   'https://movies.dvoeglazov.nomoredomains.rocks',
   'https://localhost:3000',
   'http://localhost:3000',
+  'http://localhost:3001',
+  'https://localhost:3001',
 ];
 
 const {
